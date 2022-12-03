@@ -1,0 +1,89 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 AREA             my_code,CODE,READWRITE
+    2 00000000         
+    3 00000000 E1510002 
+                       gcd     CMP              R1, R2      ;R1 - R2 and set th
+                                                            e cpsr
+    4 00000004 CA000001        BGT              cond1       ;if R1 > R2
+    5 00000008 BA000002        BLT              cond2       ;if R1 < R2
+    6 0000000C 0A000003        BEQ              end_res     ;if R1 = R2
+    7 00000010         
+    8 00000010 E0411002 
+                       cond1   SUB              R1, R1, R2
+    9 00000014 EAFFFFF9        B                gcd
+   10 00000018         
+   11 00000018 E0422001 
+                       cond2   SUB              R2, R2, R1
+   12 0000001C EAFFFFF7        B                gcd
+   13 00000020         
+   14 00000020 E1A03002 
+                       end_res MOV              R3, R2      ;R1 = R2 = gcd
+   15 00000024         
+   16 00000024 EAFFFFFE 
+                       final   B                final
+   17 00000028                 END
+Command Line: --debug --xref --diag_suppress=9931 --apcs=interwork --depend=.\o
+bjects\prog2.d -o.\objects\prog2.o -IC:\Keil_v5\ARM\RV31\INC --predefine="__UVI
+SION_VERSION SETA 536" --list=.\listings\prog2.lst prog2.asm
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+cond1 00000010
+
+Symbol: cond1
+   Definitions
+      At line 8 in file prog2.asm
+   Uses
+      At line 4 in file prog2.asm
+Comment: cond1 used once
+cond2 00000018
+
+Symbol: cond2
+   Definitions
+      At line 11 in file prog2.asm
+   Uses
+      At line 5 in file prog2.asm
+Comment: cond2 used once
+end_res 00000020
+
+Symbol: end_res
+   Definitions
+      At line 14 in file prog2.asm
+   Uses
+      At line 6 in file prog2.asm
+Comment: end_res used once
+final 00000024
+
+Symbol: final
+   Definitions
+      At line 16 in file prog2.asm
+   Uses
+      At line 16 in file prog2.asm
+Comment: final used once
+gcd 00000000
+
+Symbol: gcd
+   Definitions
+      At line 3 in file prog2.asm
+   Uses
+      At line 9 in file prog2.asm
+      At line 12 in file prog2.asm
+
+my_code 00000000
+
+Symbol: my_code
+   Definitions
+      At line 1 in file prog2.asm
+   Uses
+      None
+Comment: my_code unused
+6 symbols
+337 symbols in table

@@ -1,0 +1,119 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 AREA             my_code,CODE,READWRITE
+    2 00000000         main
+    3 00000000 E3A00101        LDR              R0, =0x40000000 ;point to start
+                                                             of array
+    4 00000004 E5D01000        LDRB             R1, [R0]    ;load the length of
+                                                             array
+    5 00000008 E2800001        ADD              R0, R0, #01 ;point to first val
+                                                            ue of array
+    6 0000000C E2411001        SUB              R1, R1, #01 ;use n-1
+    7 00000010 E3A02000        MOV              R2, #00     ;start at index 0
+    8 00000014         for1
+    9 00000014 E1520001        CMP              R2, R1      ;if i>=n-1, end sor
+                                                            t
+   10 00000018 AA000010        BGE              final
+   11 0000001C E1A03002        MOV              R3, R2      ;min_index = i
+   12 00000020 E2824001        ADD              R4, R2, #01 ;start at j=i+1
+   13 00000024         for2
+   14 00000024 E1540001        CMP              R4, R1      ;if j>n-1, end for2
+                                                            
+   15 00000028 CA000006        BGT              endfor2
+   16 0000002C         
+   17 0000002C E7D05004        LDRB             R5, [R0, R4] ;load array[j]
+   18 00000030 E7D06003        LDRB             R6, [R0, R3] ;load array[min_in
+                                                            dex]
+   19 00000034 E1550006        CMP              R5, R6
+   20 00000038 AA000000        BGE              next
+   21 0000003C E1A03004        MOV              R3, R4      ;min_index=j
+   22 00000040         next
+   23 00000040 E2844001        ADD              R4, R4, #01 ;j++
+   24 00000044 EAFFFFF6        B                for2        ;repeat for2
+   25 00000048         endfor2
+   26 00000048 E7D05002        LDRB             R5, [R0, R2] ;load array[i]
+   27 0000004C E7D06003        LDRB             R6, [R0, R3] ;load array[min_in
+                                                            dex]
+   28 00000050 E7C06002        STRB             R6, [R0, R2] ;save swapped in a
+                                                            rray[i]
+   29 00000054 E7C05003        STRB             R5, [R0, R3] ;save swapped in a
+                                                            rray[min_index]
+   30 00000058         
+   31 00000058 E2822001        ADD              R2, R2, #01 ;i++
+   32 0000005C EAFFFFEC        B                for1        ;repeat for1
+   33 00000060         final
+   34 00000060 EAFFFFFE        B                final
+   35 00000064         
+   36 00000064                 END
+Command Line: --debug --xref --diag_suppress=9931 --apcs=interwork --depend=.\o
+bjects\prog1.d -o.\objects\prog1.o -IC:\Keil_v5\ARM\RV31\INC --predefine="__UVI
+SION_VERSION SETA 536" --list=.\listings\prog1.lst prog1.asm
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+endfor2 00000048
+
+Symbol: endfor2
+   Definitions
+      At line 25 in file prog1.asm
+   Uses
+      At line 15 in file prog1.asm
+Comment: endfor2 used once
+final 00000060
+
+Symbol: final
+   Definitions
+      At line 33 in file prog1.asm
+   Uses
+      At line 10 in file prog1.asm
+      At line 34 in file prog1.asm
+
+for1 00000014
+
+Symbol: for1
+   Definitions
+      At line 8 in file prog1.asm
+   Uses
+      At line 32 in file prog1.asm
+Comment: for1 used once
+for2 00000024
+
+Symbol: for2
+   Definitions
+      At line 13 in file prog1.asm
+   Uses
+      At line 24 in file prog1.asm
+Comment: for2 used once
+main 00000000
+
+Symbol: main
+   Definitions
+      At line 2 in file prog1.asm
+   Uses
+      None
+Comment: main unused
+my_code 00000000
+
+Symbol: my_code
+   Definitions
+      At line 1 in file prog1.asm
+   Uses
+      None
+Comment: my_code unused
+next 00000040
+
+Symbol: next
+   Definitions
+      At line 22 in file prog1.asm
+   Uses
+      At line 20 in file prog1.asm
+Comment: next used once
+7 symbols
+338 symbols in table
